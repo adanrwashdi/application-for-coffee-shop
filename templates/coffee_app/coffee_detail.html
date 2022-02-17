@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load custom_tags %}
+
+{% block extra_style %} 
+{% endblock extra_style %}
+
+{% block footer %}
+
+
+    <section class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-5 col-md-5 col-sm-6">
+                                <div class="text-center"><img src="{{coffee.get_image_url}}" class="img-responsive" width="100%"></div>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-6">
+                                <h4>{{coffee.name}}</h4>
+                                <p class="text-muted">
+                                    {{coffee.description}}
+                                </p>
+                                <h2 class="mt-5">
+                                    ${{coffee.price}}
+                                </h2>
+                                <form action="{% url 'cart_view' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="product_id" value="{{coffee.id}}">
+                                    <input type="hidden" name="action" value="add">
+                                    <button class="btn btn-dark btn-rounded mr-1" type="submit">
+                                        Buy
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+
+
+
+
